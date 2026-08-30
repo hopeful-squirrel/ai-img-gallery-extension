@@ -1,0 +1,47 @@
+/* 갤러리 프롬프트 패널 - NAI 페이지 위 플로팅 저장 칩 */
+.gpp-save-chip {
+    position: absolute;
+    z-index: 2147483646;
+    display: none;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 10px 28px rgba(2, 8, 23, 0.45);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.gpp-save-chip.gpp-visible {
+    display: block;
+}
+
+.gpp-save-chip:hover {
+    background: #2563eb;
+    border-color: #3b82f6;
+}
+
+/* 추적 구간 표시: 시작/끝 지점의 ✦ 마커 (클릭 통과, 에디터 위에 겹쳐 그림) */
+.gpp-region-overlay {
+    position: fixed;
+    inset: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 2147483645;
+}
+
+.gpp-region-marker {
+    position: fixed;
+    pointer-events: none;
+    line-height: 1;
+    border-radius: 4px;
+    font-family: "Apple SD Gothic Neo", "Segoe UI Symbol", sans-serif;
+    user-select: none;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>갤러리 프롬프트 패널</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-title">
+    <span class="logo">📁</span>
+    <select id="gallerySelect" class="gallery-select" title="갤러리 선택"></select>
+  </div>
+  <div class="topbar-actions">
+    <button id="refreshBtn" class="icon-btn" title="새로고침">⟳</button>
+    <button id="settingsBtn" class="icon-btn" title="설정">⚙</button>
+  </div>
+</header>
+
+<div id="statusBar" class="status-bar">
+  <span id="naiStatus" class="status-chip">NAI 확인 중…</span>
+  <span id="galleryStatus" class="status-chip">갤러리 확인 중…</span>
+</div>
+
+<section id="loginSection" class="login-section" hidden>
+  <p>갤러리 소유자 로그인이 필요해요.<br>갤러리 관리자 페이지에서 로그인한 뒤 돌아와 주세요.</p>
+  <div class="row">
+    <button id="openGalleryBtn" class="btn">갤러리 열기</button>
+    <button id="recheckBtn" class="btn btn-ghost">다시 확인</button>
+  </div>
+</section>
+
+<section id="browserSection" hidden>
+  <nav id="sectionChips" class="chips"></nav>
+  <div class="filter-row">
+    <div class="folder-nav browse-nav">
+      <div id="browseCrumbs" class="folder-crumbs"></div>
+      <div id="browseList" class="folder-list"></div>
+    </div>
+  </div>
+  <div class="filter-row">
+    <input id="searchInput" class="search-input" type="search" placeholder="제목·프롬프트 검색">
+  </div>
+
+  <div id="appliedBanner" class="applied-banner" hidden>
+    <div class="applied-info">
+      <span class="applied-label">적용 중</span>
+      <span id="appliedTitle" class="applied-title"></span>
+      <span id="appliedEdited" class="applied-edited" hidden>수정됨</span>
+    </div>
+    <div class="applied-actions">
+      <button id="detachBtn" class="mini-btn" title="추적만 해제 (텍스트는 유지)">추적 해제</button>
+      <button id="removeBtn" class="mini-btn mini-danger" title="NAI에서 삽입한 텍스트 삭제">텍스트 삭제</button>
+    </div>
+  </div>
+
+  <div id="postList" class="post-list"></div>
+  <nav id="pager" class="pager" hidden></nav>
+  <p id="listEmpty" class="empty-note" hidden>프롬프트가 없어요.</p>
+</section>
+
+<section id="saveSection" class="save-section">
+  <button id="saveToggle" class="save-toggle">➕ 새 프롬프트 저장</button>
+  <form id="saveForm" class="save-form" hidden>
+    <label>제목 <span class="req">*</span>
+      <input id="saveTitle" type="text" maxlength="255" required>
+    </label>
+    <label>탭
+      <select id="saveSection_"></select>
+    </label>
+    <div class="save-field">
+      <span class="field-label">저장 위치 <span class="req">*</span></span>
+      <div class="folder-nav">
+        <div class="folder-nav-head">
+          <div id="folderCrumbs" class="folder-crumbs"></div>
+          <button type="button" id="newFolderToggle" class="folder-add-btn">＋ 하위 폴더</button>
+        </div>
+        <div id="folderList" class="folder-list"></div>
+        <div id="newFolderBox" class="new-folder-box" hidden>
+          <input id="newFolderName" type="text" maxlength="100" placeholder="새 폴더 이름 (현재 위치에 생성)">
+          <button type="button" id="newFolderCreate" class="mini-btn">만들기</button>
+        </div>
+      </div>
+    </div>
+    <p id="savePathNote" class="save-path-note"></p>
+    <label>프롬프트
+      <textarea id="savePrompt" rows="5" placeholder="NAI에서 드래그하면 자동으로 채워져요"></textarea>
+    </label>
+    <div id="extraPrompts" class="extra-prompts"></div>
+    <button type="button" id="addExtraBtn" class="mini-btn add-extra-btn">➕ 추가 프롬프트 (0/3)</button>
+    <label>설명 (선택)
+      <textarea id="saveContent" rows="2"></textarea>
+    </label>
+    <label>해시태그 (쉼표로 구분, 선택)
+      <input id="saveHashtags" type="text">
+    </label>
+    <div class="image-box">
+      <img id="saveImagePreview" alt="" hidden>
+      <p id="saveImageNote" class="image-note">이미지 없음</p>
+      <div class="row">
+        <button type="button" id="grabImageBtn" class="mini-btn">NAI 이미지 가져오기</button>
+        <label class="mini-btn file-btn">파일 선택<input id="saveImageFile" type="file" accept="image/*" hidden></label>
+        <button type="button" id="clearImageBtn" class="mini-btn" hidden>이미지 제거</button>
+      </div>
+      <label class="check-row meta-check"><input id="savePreserve" type="checkbox"> 원본 그대로 저장 (NAI 메타데이터 유지)</label>
+      <p id="metaNote" class="image-note"></p>
+    </div>
+    <label class="check-row"><input id="saveHidden" type="checkbox"> 숨김(비공개)으로 저장</label>
+    <button type="submit" id="saveSubmit" class="btn btn-primary">갤러리에 저장</button>
+  </form>
+</section>
+
+<div id="toast" class="toast" hidden></div>
+
+<dialog id="settingsDialog" class="settings-dialog">
+  <form method="dialog" class="settings-form">
+    <h2>설정</h2>
+    <label>첫 삽입 위치
+      <select id="setInsertMode">
+        <option value="caret">프롬프트 창의 커서 위치</option>
+        <option value="end">프롬프트 맨 뒤</option>
+        <option value="start">프롬프트 맨 앞</option>
+      </select>
+    </label>
+    <label class="check-row"><input id="setAutoComma" type="checkbox" checked> 삽입 시 자동으로 쉼표(", ") 붙이기</label>
+    <label class="check-row"><input id="setShowRegion" type="checkbox" checked> NAI 프롬프트 창에 추적 구간(✦) 표시</label>
+    <div class="marker-style">
+      <div class="marker-preview">1girl, <span class="mk-prev" id="mkPrevA">✦</span>silver hair, smile<span class="mk-prev" id="mkPrevB">✦</span>, outdoors</div>
+      <span class="setting-sub">✦ 글자 색</span>
+      <div class="swatch-row" id="markerColorRow"></div>
+      <span class="setting-sub">✦ 배경 색</span>
+      <div class="swatch-row" id="markerBgRow"></div>
+    </div>
+    <div class="row">
+      <button value="save" class="btn btn-primary">저장</button>
+      <button value="cancel" class="btn btn-ghost" formnovalidate>닫기</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="panel.js"></script>
+</body>
+</html>

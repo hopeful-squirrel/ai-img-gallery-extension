@@ -1,0 +1,671 @@
+/* 갤러리 프롬프트 패널 - 사이드패널 스타일 (갤러리 사이트 팔레트와 통일) */
+:root {
+    --bg: #f8fafc;
+    --panel: #ffffff;
+    --ink: #334155;
+    --muted: #64748b;
+    --line: rgba(148, 163, 184, 0.28);
+    --accent: #3b82f6;
+    --accent-strong: #2563eb;
+    --accent-soft: rgba(59, 130, 246, 0.12);
+    --danger: #dc2626;
+    --radius: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f172a;
+        --panel: #1e293b;
+        --ink: #f8fafc;
+        --muted: #94a3b8;
+        --line: rgba(148, 163, 184, 0.22);
+        --accent: #38bdf8;
+        --accent-strong: #0ea5e9;
+        --accent-soft: rgba(56, 189, 248, 0.14);
+        --danger: #f87171;
+    }
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body { margin: 0; height: 100%; }
+
+body {
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+}
+
+button, input, textarea, select {
+    font: inherit;
+    color: inherit;
+}
+
+/* ---------- 상단 바 ---------- */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px 6px;
+}
+
+.topbar-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+}
+
+.logo { font-size: 16px; }
+
+.gallery-select {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 5px 8px;
+    font-weight: 600;
+}
+
+.topbar-actions { display: flex; gap: 4px; }
+
+.icon-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+}
+.icon-btn:hover { border-color: var(--accent); color: var(--accent-strong); }
+
+/* ---------- 상태 ---------- */
+.status-bar {
+    display: flex;
+    gap: 6px;
+    padding: 0 12px 8px;
+    flex-wrap: wrap;
+}
+
+.status-chip {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--muted);
+}
+.status-chip.ok { color: #16a34a; border-color: rgba(22, 163, 74, 0.4); }
+.status-chip.bad { color: var(--danger); border-color: rgba(220, 38, 38, 0.35); }
+
+/* ---------- 로그인 안내 ---------- */
+.login-section {
+    margin: 8px 12px;
+    padding: 14px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-align: center;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* ---------- 공통 버튼 ---------- */
+.btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    cursor: pointer;
+    font-weight: 600;
+}
+.btn:hover { border-color: var(--accent); }
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+.btn-primary:disabled { opacity: 0.5; cursor: default; }
+.btn-ghost { background: transparent; }
+
+.mini-btn {
+    padding: 4px 9px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    cursor: pointer;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--ink);
+}
+.mini-btn:hover { border-color: var(--accent); color: var(--accent-strong); }
+.mini-danger:hover { border-color: var(--danger); color: var(--danger); }
+.file-btn { display: inline-flex; align-items: center; }
+
+.row { display: flex; gap: 6px; align-items: center; }
+.grow { flex: 1; min-width: 0; }
+
+/* ---------- 필터 ---------- */
+#browserSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 0 12px;
+}
+
+.chips {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    padding-bottom: 6px;
+}
+
+.chip {
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+.chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.filter-row { padding-bottom: 6px; }
+
+.search-input {
+    width: 100%;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 6px 9px;
+}
+.search-input:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+.browse-nav { background: var(--panel); }
+.browse-nav .folder-list { max-height: 180px; }
+.browse-nav .folder-crumbs { cursor: pointer; }
+.browse-nav:has(.folder-list[hidden]) .folder-crumbs { border-bottom: none; }
+
+.nav-toggle {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 6px;
+    user-select: none;
+}
+.folder-crumbs:hover .nav-toggle { color: var(--accent-strong); }
+
+/* ---------- 적용 중 배너 ---------- */
+.applied-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 7px 9px;
+    margin-bottom: 6px;
+    border: 1px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: 10px;
+}
+.applied-info { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.applied-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--accent-strong);
+    white-space: nowrap;
+}
+.applied-title {
+    font-size: 12px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.applied-edited {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: #f59e0b;
+    color: #fff;
+    white-space: nowrap;
+}
+.applied-actions { display: flex; gap: 4px; flex-shrink: 0; }
+
+/* ---------- 프롬프트 카드 ---------- */
+.post-list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-bottom: 8px;
+}
+
+.post-card {
+    display: flex;
+    gap: 9px;
+    padding: 8px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+.post-card.applied { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+.post-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--bg);
+    cursor: zoom-in;
+}
+
+.post-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+
+.post-title-row { display: flex; align-items: center; gap: 5px; }
+.post-title {
+    font-weight: 700;
+    font-size: 12.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+}
+.post-badge {
+    font-size: 9.5px;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    white-space: nowrap;
+}
+.post-folder {
+    font-size: 10.5px;
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.post-preview {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+    cursor: pointer;
+}
+.post-preview.expanded { display: block; -webkit-line-clamp: unset; }
+
+.post-actions { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+
+.post-extras { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.extra-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--muted);
+}
+.extra-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pager {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 2px 0 10px;
+}
+.page-btn {
+    min-width: 28px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+}
+.page-btn:hover:not(:disabled):not(.current) { border-color: var(--accent); color: var(--accent-strong); }
+.page-btn.current {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    cursor: default;
+}
+.page-btn:disabled { opacity: 0.4; cursor: default; }
+.page-gap { color: var(--muted); padding: 0 2px; font-size: 12px; }
+
+.empty-note { color: var(--muted); text-align: center; padding: 18px 0; }
+
+/* ---------- 저장 폼 ---------- */
+.save-section {
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+    padding: 8px 12px 12px;
+    max-height: 62vh;
+    overflow-y: auto;
+}
+
+.save-toggle {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: left;
+    color: var(--accent-strong);
+}
+
+.save-form { display: flex; flex-direction: column; gap: 8px; }
+.save-form label, .save-form .save-field { display: flex; flex-direction: column; gap: 3px; font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.save-form .field-label { display: block; }
+.save-form input[type="text"], .save-form input[type="url"], .save-form textarea, .save-form select {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 9px;
+    background: var(--bg);
+    color: var(--ink);
+    font-weight: 400;
+    resize: vertical;
+}
+.req { color: var(--danger); }
+
+.check-row { flex-direction: row !important; align-items: center; gap: 6px !important; }
+
+/* ---------- 파인더식 폴더 내비게이터 ---------- */
+.folder-nav {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    overflow: hidden;
+}
+.folder-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+    font-weight: 400;
+}
+
+/* 저장 폼: 브레드크럼 오른쪽에 '하위 폴더 추가' 버튼 (탐색 내비게이터에는 없음) */
+.folder-nav-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+}
+.folder-nav-head .folder-crumbs {
+    flex: 1;
+    min-width: 0;
+    border-bottom: none;
+}
+.folder-add-btn {
+    flex-shrink: 0;
+    margin-right: 6px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: var(--bg);
+    color: var(--accent-strong);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.folder-add-btn:hover { background: var(--accent-soft); }
+.folder-add-btn.is-open {
+    background: var(--accent-soft);
+    border-color: var(--accent-strong);
+}
+.crumb {
+    border: none;
+    background: transparent;
+    color: var(--accent-strong);
+    cursor: pointer;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 2px 4px;
+    border-radius: 6px;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.crumb.current { color: var(--ink); cursor: default; }
+.crumb:not(.current):hover { background: var(--accent-soft); }
+.crumb-sep { color: var(--muted); font-size: 10px; }
+
+.folder-list {
+    max-height: 168px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.folder-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    text-align: left;
+    width: 100%;
+    font-weight: 400;
+}
+.folder-row:hover { background: var(--accent-soft); }
+.folder-row + .folder-row { border-top: 1px solid var(--line); }
+.fr-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fr-meta { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.folder-row.fr-up, .folder-row.fr-new { color: var(--accent-strong); font-weight: 600; }
+.folder-empty { padding: 9px 10px; color: var(--muted); font-size: 11.5px; }
+
+.save-path-note { margin: -2px 0 0; font-size: 11px; color: var(--muted); }
+
+.new-folder-box {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    border-top: 1px dashed var(--line);
+    padding: 7px;
+    background: var(--panel);
+}
+.new-folder-box input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 5px 8px;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.extra-prompts { display: flex; flex-direction: column; gap: 6px; }
+.extra-edit {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: var(--bg);
+}
+.extra-edit-head { display: flex; gap: 5px; align-items: center; }
+.extra-edit-head input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 4px 8px;
+    background: var(--panel);
+    color: var(--ink);
+    font-size: 12px;
+}
+.extra-edit textarea {
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 5px 8px;
+    background: var(--panel);
+    color: var(--ink);
+    font-weight: 400;
+    resize: vertical;
+    font-size: 12px;
+}
+.add-extra-btn { align-self: flex-start; }
+.add-extra-btn:disabled { opacity: 0.45; cursor: default; }
+
+.image-box {
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+#saveImagePreview {
+    max-width: 100%;
+    max-height: 140px;
+    border-radius: 8px;
+}
+.image-note { margin: 0; font-size: 11px; color: var(--muted); }
+
+/* ---------- 토스트 ---------- */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: #f8fafc;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(2, 8, 23, 0.4);
+    z-index: 99;
+    max-width: 90%;
+    text-align: center;
+}
+.toast.error { background: #7f1d1d; }
+
+/* ---------- 설정 ---------- */
+.settings-dialog {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    color: var(--ink);
+    width: min(92vw, 320px);
+    padding: 0;
+}
+.settings-dialog::backdrop { background: rgba(2, 8, 23, 0.4); }
+.settings-form { display: flex; flex-direction: column; gap: 10px; padding: 14px; }
+.settings-form h2 { margin: 0; font-size: 14px; }
+.settings-form label { display: flex; flex-direction: column; gap: 3px; font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.settings-form input, .settings-form select {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 9px;
+    background: var(--bg);
+    color: var(--ink);
+}
+
+/* ---------- ✦ 마커 색상 선택 ---------- */
+.marker-style { display: flex; flex-direction: column; gap: 6px; }
+.setting-sub { font-size: 11px; color: var(--muted); font-weight: 600; }
+
+.marker-preview {
+    background: #111827;
+    color: #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: ui-monospace, monospace;
+    word-break: break-all;
+}
+.mk-prev { border-radius: 3px; }
+
+.swatch-row { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+.swatch.selected { outline: 2px solid var(--accent); outline-offset: 2px; }
+.swatch-none { background: var(--panel); overflow: hidden; }
+.swatch-none::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 140%;
+    background: #ef4444;
+    transform: rotate(45deg);
+    border-radius: 2px;
+}
+.swatch-custom {
+    background: conic-gradient(#f43f5e, #f59e0b, #84cc16, #06b6d4, #6366f1, #d946ef, #f43f5e);
+    overflow: hidden;
+}
+.swatch-custom input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+}
+
+.meta-check { font-size: 11.5px; }
